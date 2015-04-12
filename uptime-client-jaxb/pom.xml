@@ -31,7 +31,7 @@
                 <version>${version.cxf}</version>
                 <executions>
                     <execution>
-                        <id>jrxml</id>
+                        <id>uptime-jaxb</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>xsdtojava</goal>
