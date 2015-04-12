@@ -1,0 +1,19 @@
+<jxb:bindings version="2.0"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance">
+    <jxb:bindings schemaLocation="com.alexkasko.thermostat.uptime.xsd">
+        <jxb:schemaBindings>
+            <jxb:package name="com.alexkasko.thermostat.uptime.client.jaxb"/>
+        </jxb:schemaBindings>
+        <!-- http://stackoverflow.com/a/22437888/314015-->
+        <jxb:bindings node="//xs:element[substring(@name,string-length(@name)-string-length('Command')+1)='Command']/xs:complexType"
+                      multiple="true">
+            <inheritance:implements>com.alexkasko.thermostat.uptime.client.UptimeCommand</inheritance:implements>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:element[substring(@name,string-length(@name)-string-length('Response')+1)='Response']/xs:complexType"
+                      multiple="true">
+            <inheritance:implements>com.alexkasko.thermostat.uptime.client.UptimeResponse</inheritance:implements>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>

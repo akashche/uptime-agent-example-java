@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.alexkasko.thermostat</groupId>
+        <artifactId>uptime-agent-example-java</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>uptime-client</artifactId>
+    <packaging>jar</packaging>
+    <name>Uptime Agent Client Library</name>
+
+    <dependencies>
+        <!-- jaxb client lib -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>uptime-client-jaxb</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- http-client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpcomponents}</version>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>

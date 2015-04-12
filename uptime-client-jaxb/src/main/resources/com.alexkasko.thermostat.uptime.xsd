@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://alexkasko.com/thermostat/uptime"
+           xmlns:upt="http://alexkasko.com/thermostat/uptime">
+
+    <!-- actions list -->
+
+    <xs:simpleType name="UptimeAction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="uptime_and_idle">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[
+                        <b>COMMAND</b>: {@link UptimeAndIdleCommand}<p>
+                        <b>RESPONSE</b>: {@link UptimeAndIdleResponse}<p>
+                        <b>METHOD</b>: GET<p>
+                        <b>BEHAVIOUR</b>: Non-blocking<p>
+                        <b>DESCRIPTION</b>: Returns current host uptime and idle time in seconds<p>
+                    ]]></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="uptime_and_idle_formatted">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[
+                        <b>COMMAND</b>: {@link UptimeAndIdleFormattedCommand}<p>
+                        <b>RESPONSE</b>: {@link UptimeAndIdleFormattedResponse}<p>
+                        <b>METHOD</b>: POST<p>
+                        <b>BEHAVIOUR</b>: Non-blocking<p>
+                        <b>DESCRIPTION</b>: Returns current host uptime and idle time in seconds using specified decimal format<p>
+                    ]]></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- commands -->
+
+    <xs:element name="UptimeAndIdleCommand">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Command to fetch uptime, does not contain data, used in GET request
+                </xs:documentation>
+            </xs:annotation>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UptimeAndIdleFormattedCommand">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Command to fetch uptime as a string with specified decimal format
+                </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="decimalFormat" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <!-- responses -->
+
+    <!-- generic transport responses -->
+
+    <xs:element name="ErrorResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Response returned on command fail, denotes transport success and business error
+                </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="code" type="xs:int"/>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="NotFoundResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Response returned on invalid action path
+                </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="path" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- actions responses -->
+
+    <xs:element name="UptimeAndIdleResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Response to uptime command, returns uptime and idle time as floats
+                </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="uptime" type="xs:float" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="idletime" type="xs:float" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UptimeAndIdleFormattedResponse">
+        <xs:complexType>
+            <xs:annotation>
+                <xs:documentation>
+                    Response to uptime-formatted command, returns uptime and idle time as strings using specified decimal format
+                </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+                <xs:element name="uptime" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="idletime" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- common types -->
+
+    <!-- ... -->
+
+</xs:schema>
