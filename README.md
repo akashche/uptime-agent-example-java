@@ -1,5 +1,5 @@
-Proof of concept example of Uptime Agent Server
-===============================================
+Proof of concept example of Uptime Agent HTTP Server in Java
+============================================================
 
 This repository contains a basic implementation of standalone HTTP server application that can recieve XML messages and send responses in RESTful way.
 
